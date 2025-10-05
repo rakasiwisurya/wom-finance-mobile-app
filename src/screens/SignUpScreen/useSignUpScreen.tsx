@@ -1,14 +1,13 @@
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useNavigation } from "@react-navigation/native";
-import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
+import { useAppNavigation } from "../../hooks/navigation";
 import { FormDataSignUp, schemaSignUp } from "../../types/signUp";
 import { asyncStorage } from "../../utils/asyncStorage";
 import { notification } from "../../utils/notification";
 
 const useSignUp = () => {
-  const navigate = useNavigation<NativeStackNavigationProp<any>>();
+  const navigate = useAppNavigation();
 
   const [isSecureText, setIsSecureText] = useState(true);
   const [isSubmitLoading, setIsSubmitLoading] = useState(false);

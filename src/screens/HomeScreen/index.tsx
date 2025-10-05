@@ -1,23 +1,28 @@
 import React from "react";
-import { Text, View } from "react-native";
-import { Button, MD2Colors } from "react-native-paper";
+import { FlatList } from "react-native";
+import Header from "../../components/Header";
+import MovieCard from "../../components/MovieCard";
+import NoData from "../../components/NoData";
+import Separator from "../../components/Separator";
 import useHomeScreen from "./useHomeScreen";
 
 const HomeScreen = () => {
-  const { logout } = useHomeScreen();
+  const { isMoviesLoading, movies, logout, onRefresh } = useHomeScreen();
 
   return (
-    <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-      <Text>HomeScreen</Text>
-
-      <Button
-        mode="contained-tonal"
-        buttonColor={MD2Colors.red700}
-        onPress={logout}
-      >
-        Logout
-      </Button>
-    </View>
+    <>
+      <Header title="Home" onLogout={logout} />
+      <FlatList
+        data={movies}
+        renderItem={(item) => <MovieCard {...item} />}
+        keyExtractor={(item) => item.id}
+        refreshing={isMoviesLoading}
+        onRefresh={onRefresh}
+        contentContainerStyle={{ padding: 15 }}
+        ItemSeparatorComponent={() => <Separator y={15} />}
+        ListEmptyComponent={<NoData />}
+      />
+    </>
   );
 };
 

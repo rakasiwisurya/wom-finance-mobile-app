@@ -1,8 +1,7 @@
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useNavigation } from "@react-navigation/native";
-import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
+import { useAppNavigation } from "../../hooks/navigation";
 import { useAppDispatch } from "../../hooks/redux";
 import { setUser } from "../../redux/features/authSlice";
 import { FormDataLogin, schemaLogin } from "../../types/login";
@@ -11,7 +10,7 @@ import { AESEncrypt } from "../../utils/crypto";
 import { notification } from "../../utils/notification";
 
 const useLoginScreen = () => {
-  const navigate = useNavigation<NativeStackNavigationProp<any>>();
+  const navigate = useAppNavigation();
 
   const [isSecureText, setIsSecureText] = useState(true);
   const [isSubmitLoading, setIsSubmitLoading] = useState(false);
@@ -56,7 +55,7 @@ const useLoginScreen = () => {
 
       const encryptedData = AESEncrypt(JSON.stringify(dbData));
 
-      await asyncStorage.setItem("token", encryptedData);
+      await asyncStorage.setItem("token", encryptedData, false);
       notification.success("Success login");
       reset();
       dispatch(setUser(dbData));

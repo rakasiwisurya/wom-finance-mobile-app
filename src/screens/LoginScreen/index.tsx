@@ -1,7 +1,7 @@
 import React from "react";
 import { Controller } from "react-hook-form";
-import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
-import { Button, MD2Colors, TextInput } from "react-native-paper";
+import { Image, StyleSheet, TouchableOpacity, View } from "react-native";
+import { Button, MD2Colors, Text, TextInput } from "react-native-paper";
 import ErrorMessage from "../../components/ErrorMessage";
 import useLoginScreen from "./useLoginScreen";
 
@@ -102,7 +102,6 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 22,
     fontWeight: "700",
-    color: MD2Colors.grey800,
     marginBottom: 20,
   },
   formContainer: {
@@ -110,7 +109,7 @@ const styles = StyleSheet.create({
     marginBottom: 25,
   },
   goToSignUpText: {
-    color: MD2Colors.blue500,
+    color: MD2Colors.blue700,
     fontWeight: "500",
     textAlign: "center",
   },

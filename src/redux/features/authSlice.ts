@@ -4,6 +4,7 @@ import { TAuthState } from "../../types/auth";
 const initialState: TAuthState = {
   user: null,
   isAppLoading: true,
+  darkMode: false,
 };
 
 const authSlice = createSlice({
@@ -17,8 +18,11 @@ const authSlice = createSlice({
     signOut: (state) => {
       state.user = null;
     },
+    toggleDarkMode: (state) => {
+      state.darkMode = !state.darkMode;
+    },
   },
 });
 
-export const { setUser, signOut } = authSlice.actions;
+export const { setUser, signOut, toggleDarkMode } = authSlice.actions;
 export const authReducer = authSlice.reducer;
