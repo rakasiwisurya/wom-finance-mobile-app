@@ -58,7 +58,9 @@ function MainApp() {
   return (
     <PaperProvider theme={theme}>
       <SafeAreaProvider>
-        <SafeAreaView style={{ flex: 1 }}>
+        <SafeAreaView
+          style={{ flex: 1, backgroundColor: theme.colors.elevation.level5 }}
+        >
           <KeyboardAvoidingView
             style={{ flex: 1 }}
             behavior={
@@ -71,7 +73,10 @@ function MainApp() {
             keyboardVerticalOffset={Platform.OS === "ios" ? 64 : 0}
           >
             <View style={{ flex: 1 }}>
-              <StatusBar style="auto" />
+              <StatusBar
+                style={darkMode ? "light" : "dark"}
+                backgroundColor={theme.colors.elevation.level5}
+              />
               <NavigationContainer>
                 <Router />
               </NavigationContainer>

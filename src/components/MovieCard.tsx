@@ -1,5 +1,6 @@
 import React from "react";
 import {
+  GestureResponderEvent,
   ListRenderItemInfo,
   StyleSheet,
   TouchableOpacity,
@@ -8,16 +9,17 @@ import {
 import { Card, Icon, MD2Colors, Text } from "react-native-paper";
 import { TMovie } from "../types/movie";
 
-const MovieCard = ({ item }: ListRenderItemInfo<TMovie>) => {
+const MovieCard = ({
+  item,
+  onPress,
+}: ListRenderItemInfo<TMovie> & {
+  onPress?: (event: GestureResponderEvent) => void;
+}) => {
   return (
     <Card style={styles.card}>
-      <TouchableOpacity>
+      <TouchableOpacity onPress={onPress}>
         <Text style={styles.title}>{item.primaryTitle}</Text>
-        <Card.Cover
-          source={{
-            uri: item.primaryImage.url,
-          }}
-        />
+        <Card.Cover source={{ uri: item.primaryImage.url }} />
         <Card.Content style={styles.contentContainer}>
           <View style={styles.dataContainer}>
             <View style={styles.ratingContainer}>
@@ -30,7 +32,13 @@ const MovieCard = ({ item }: ListRenderItemInfo<TMovie>) => {
             <Text style={styles.description}>{item.startYear}</Text>
           </View>
           <View style={styles.descriptionContainer}>
-            <Text style={styles.description}>{item.plot}</Text>
+            <Text
+              style={styles.description}
+              numberOfLines={2}
+              ellipsizeMode="tail"
+            >
+              {item.plot}
+            </Text>
           </View>
         </Card.Content>
       </TouchableOpacity>

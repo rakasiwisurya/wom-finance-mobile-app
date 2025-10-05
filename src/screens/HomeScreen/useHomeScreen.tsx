@@ -1,11 +1,15 @@
 import { useEffect } from "react";
+import { useAppNavigation } from "../../hooks/navigation";
 import { useAppDispatch, useAppSelector } from "../../hooks/redux";
 import { signOut } from "../../redux/features/authSlice";
-import { getMovies } from "../../redux/features/movieSlice";
+import { getMovies, resetMovies } from "../../redux/features/movieSlice";
+import { TMovie } from "../../types/movie";
 import { asyncStorage } from "../../utils/asyncStorage";
 import { notification } from "../../utils/notification";
 
 const useHomeScreen = () => {
+  const navigate = useAppNavigation();
+
   const dispatch = useAppDispatch();
   const {
     isMoviesLoading,
@@ -24,11 +28,17 @@ const useHomeScreen = () => {
 
   const onRefresh = () => dispatch(getMovies());
 
+  const onGoToDetail = (data: TMovie) => navigate.push("Detail", data);
+
   useEffect(() => {
     dispatch(getMovies());
+
+    return () => {
+      dispatch(resetMovies());
+    };
   }, [dispatch]);
 
-  return { isMoviesLoading, movies, logout, onRefresh };
+  return { isMoviesLoading, movies, logout, onRefresh, onGoToDetail };
 };
 
 export default useHomeScreen;

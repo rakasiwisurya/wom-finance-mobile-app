@@ -19,7 +19,7 @@ const Header = ({ title, onBack, onLogout }: THeaderProps) => {
         { backgroundColor: theme.colors.elevation.level2 },
       ]}
     >
-      {onBack ? (
+      {onBack && (
         <View style={styles.leftBox}>
           <IconButton
             icon="arrow-left"
@@ -27,8 +27,14 @@ const Header = ({ title, onBack, onLogout }: THeaderProps) => {
             iconColor={theme.colors.onSurface}
           />
         </View>
-      ) : (
-        <View style={styles.leftBox} />
+      )}
+
+      {onLogout && (
+        <IconButton
+          icon="logout"
+          onPress={onLogout}
+          iconColor={theme.colors.onSurface}
+        />
       )}
 
       <View>
@@ -42,14 +48,6 @@ const Header = ({ title, onBack, onLogout }: THeaderProps) => {
           onPress={toggleTheme}
           iconColor={theme.colors.onSurface}
         />
-
-        {onLogout && (
-          <IconButton
-            icon="logout"
-            onPress={onLogout}
-            iconColor={theme.colors.onSurface}
-          />
-        )}
       </View>
     </View>
   );

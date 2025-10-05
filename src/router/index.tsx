@@ -2,6 +2,7 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { useTheme } from "react-native-paper";
 import { useAuth } from "../hooks/auth";
 import { useAppSelector } from "../hooks/redux";
+import DetailScreen from "../screens/DetailScreen";
 import HomeScreen from "../screens/HomeScreen";
 import LoginScreen from "../screens/LoginScreen";
 import SignUpScreen from "../screens/SignUpScreen";
@@ -24,7 +25,10 @@ const Router = () => {
       }}
     >
       {isAuthorized ? (
-        <Stack.Screen name="Home" component={HomeScreen} />
+        <>
+          <Stack.Screen name="Home" component={HomeScreen} />
+          <Stack.Screen name="Detail" component={DetailScreen} />
+        </>
       ) : (
         <>
           <Stack.Screen name="Login" component={LoginScreen} />

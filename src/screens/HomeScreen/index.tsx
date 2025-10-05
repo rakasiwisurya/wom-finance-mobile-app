@@ -7,14 +7,17 @@ import Separator from "../../components/Separator";
 import useHomeScreen from "./useHomeScreen";
 
 const HomeScreen = () => {
-  const { isMoviesLoading, movies, logout, onRefresh } = useHomeScreen();
+  const { isMoviesLoading, movies, logout, onRefresh, onGoToDetail } =
+    useHomeScreen();
 
   return (
     <>
       <Header title="Home" onLogout={logout} />
       <FlatList
         data={movies}
-        renderItem={(item) => <MovieCard {...item} />}
+        renderItem={(data) => (
+          <MovieCard {...data} onPress={() => onGoToDetail(data.item)} />
+        )}
         keyExtractor={(item) => item.id}
         refreshing={isMoviesLoading}
         onRefresh={onRefresh}
