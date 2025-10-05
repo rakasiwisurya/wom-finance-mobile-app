@@ -70,7 +70,7 @@ function MainApp() {
                   : "height"
                 : undefined
             }
-            keyboardVerticalOffset={Platform.OS === "ios" ? 64 : 0}
+            keyboardVerticalOffset={0}
           >
             <View style={{ flex: 1 }}>
               <StatusBar
