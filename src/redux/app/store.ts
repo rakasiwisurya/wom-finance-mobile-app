@@ -7,7 +7,8 @@ const store = configureStore({
     auth: authReducer,
     movie: movieReducer,
   },
-  devTools: process.env.NODE_ENV === "development",
+  // devTools: process.env.NODE_ENV === "development",
+  devTools: false,
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({ serializableCheck: false }),
 });

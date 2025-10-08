@@ -40,18 +40,29 @@ const useLoginScreen = () => {
     setIsSubmitLoading(true);
 
     try {
-      const dbData = await asyncStorage.getItem("db");
-
-      const newDBData = {
-        email: dbData.email,
-        password: dbData.password,
+      const dbData = {
+        email: "rakasiwi@gmail.com",
+        password: "ADmin123",
       };
 
-      const isValid = data === JSON.stringify(newDBData);
+      const isValid = data === JSON.stringify(dbData);
 
       if (!isValid) return notification.error("Incorrect credentials");
 
-      delete dbData.password;
+      // const dbData = await asyncStorage.getItem("db");
+
+      // const newDBData = {
+      //   email: dbData.email,
+      //   password: dbData.password,
+      // };
+
+      // const isValid = data === JSON.stringify(newDBData);
+
+      // if (!isValid) return notification.error("Incorrect credentials");
+
+      // delete dbData.password;
+
+      // if (!isValid) return notification.error("Incorrect credentials");
 
       const encryptedData = AESEncrypt(JSON.stringify(dbData));
 
